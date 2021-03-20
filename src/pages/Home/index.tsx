@@ -27,12 +27,14 @@ const Home = (): JSX.Element => {
 
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
     const id = product.id;
-    const amount = product.amount;
+    const lengthCart = cart.length;
 
     const data = {
       ...sumAmount,
-      [id]: amount,
+      [id]: product.amount,
     };
+
+    console.log(lengthCart);
 
     // sumAmount é um CartItemsAmount que é um object com [key]: number
     return data;
@@ -66,7 +68,7 @@ const Home = (): JSX.Element => {
           >
             <div data-testid="cart-product-quantity">
               <MdAddShoppingCart size={16} color="#FFF" />
-              {cartItemsAmount[product.id] || 0}
+              {cartItemsAmount[product.id] | 0}
             </div>
 
             <span>ADICIONAR AO CARRINHO</span>
