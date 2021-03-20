@@ -61,7 +61,9 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const removeProduct = (productId: number) => {
     try {
       // TODO
-    } catch {}
+    } catch {
+      toast.error("Erro na remoção do produto");
+    }
   };
 
   const updateProductAmount = async ({
