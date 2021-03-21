@@ -22,19 +22,17 @@ interface CartItemsAmount {
 }
 
 const Home = (): JSX.Element => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductFormatted[]>([]);
   const { addProduct, cart } = useCart();
 
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
     const id = product.id;
-    const lengthCart = cart.length;
+    const cartFiltered = cart.filter((product) => id === product.id);
 
     const data = {
       ...sumAmount,
-      [id]: product.amount,
+      [id]: cartFiltered[0].amount,
     };
-
-    console.log(lengthCart);
 
     // sumAmount é um CartItemsAmount que é um object com [key]: number
     return data;
@@ -44,7 +42,14 @@ const Home = (): JSX.Element => {
     async function loadProducts() {
       const response = await api.get<Product[]>("/products");
 
-      setProducts(response.data);
+      const cartFormatted: ProductFormatted[] = response.data.map(
+        (product) => ({
+          ...product,
+          priceFormatted: formatPrice(product.price),
+        })
+      );
+
+      setProducts(cartFormatted);
     }
 
     loadProducts();
@@ -60,7 +65,7 @@ const Home = (): JSX.Element => {
         <li key={product.id}>
           <img src={product.image} alt={product.title} />
           <strong>{product.title}</strong>
-          <span>{formatPrice(product.price)}</span>
+          <span>{product.priceFormatted}</span>
           <button
             type="button"
             data-testid="add-product-button"

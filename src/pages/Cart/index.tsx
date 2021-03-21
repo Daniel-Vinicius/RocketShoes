@@ -28,20 +28,20 @@ const Cart = (): JSX.Element => {
 
   const total = formatPrice(
     cart.reduce((sumTotal, product) => {
-      return (sumTotal += product.price);
+      return (sumTotal += product.price * product.amount);
     }, 0)
   );
 
   function handleProductIncrement(product: Product) {
     updateProductAmount({
-      amount: product.amount,
+      amount: product.amount + 1,
       productId: product.id,
     });
   }
 
   function handleProductDecrement(product: Product) {
     updateProductAmount({
-      amount: product.amount,
+      amount: product.amount - 1,
       productId: product.id,
     });
   }
@@ -66,10 +66,7 @@ const Cart = (): JSX.Element => {
           {cartFormatted.map((product) => (
             <tr data-testid="product" key={product.id}>
               <td>
-                <img
-                  src="https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg"
-                  alt={product.title}
-                />
+                <img src={product.image} alt={product.title} />
               </td>
               <td>
                 <strong>{product.title}</strong>
@@ -89,7 +86,7 @@ const Cart = (): JSX.Element => {
                     type="text"
                     data-testid="product-amount"
                     readOnly
-                    value={2}
+                    value={product.amount}
                   />
                   <button
                     type="button"
