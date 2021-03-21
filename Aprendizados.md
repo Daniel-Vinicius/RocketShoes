@@ -146,23 +146,122 @@ const array = ["Batata", "Tomate"];
 // array['Batata'] Sintaxe inválida
 ```
 
-- **7 Não Confunda Array Com Objeto**
+- **7 Filter**
+  Sempre que Precisar de um Array Filtrado USE FILTERR
+
+  Filtrar Filmes de Ação
 
 ```tsx
-const objeto = {
-  prop1: "Tomate",
-  prop2: 3,
-};
+const filmes = [
+  {
+    id: 1,
+    name: "Os Parças",
+    genrer: "Comédia",
+  },
+  {
+    id: 2,
+    name: "Os Tiozinhos",
+    genrer: "Ação",
+  },
+];
 
-// objeto[0] Não irá retornar nada pois nenhuma propriedade do objeto é igual 0
+const filmesDeAcao = filmes.filter((filme) => {
+  if (filme.genrer === "Ação") {
+    return filme;
+  }
+});
 
-// objeto[3] irá retornar o objeto pois a prop2 do objeto é igual a 3
+console.log(filmesDeAcao);
 
-// objeto['Tomate'] irá retornar o objeto pois a prop1 do objeto é igual 'Tomate'
+/*
+Retorna Um Array com os filmes de Ação
 
-const array = ["Batata", "Tomate"];
+[{
+  genrer: "Ação",
+  id: 2,
+  name: "Os Tiozinhos"
+}]
 
-// array[0] irá Retornar Batata pois o item de indice 0 é 'Batata'
+*/
+```
 
-// array['Batata'] Sintaxe inválida
+Filtrar filmes com o id diferente do passado (Sintaxe reduzida)
+
+```tsx
+const filmes = [
+  {
+    id: 1,
+    name: "Os Parças",
+    genrer: "Comédia",
+  },
+  {
+    id: 2,
+    name: "Os Tiozinhos",
+    genrer: "Ação",
+  },
+];
+
+function filtarPorId(id) {
+  const filmesDeAcao = filmes.filter((filme) => filme.id !== id);
+
+  return filmesDeAcao;
+}
+
+console.log(filtarPorId(2));
+
+/*
+Retorna Um Array com todos os filmes menos o de id 2
+
+[{
+  genrer: "Comédia",
+  id: 1,
+  name: "Os Parças"
+}]
+
+*/
+```
+
+- **8 Reduce**
+  Sempre que Precisar Reduzir valores que estão dentro de Arrays USE REDUCE
+
+  Sintaxe:
+
+  ```tsx
+  array.reduce(function(acumulador, elementoAtual, indexAtual, arrayOriginal), valorInicial)
+  ```
+
+  Detalhes em: https://medium.com/@raullesteves/javascript-entendendo-o-reduce-de-uma-vez-por-todas-c4cbaa16e380
+
+  - Calculando o Total de uma compra a partir de um array de produtos
+
+  OBS: Sempre no reduce é obrigatório retornar por último o acumulador
+
+```tsx
+const sapatos = [
+  {
+    id: 1,
+    title: "Tênis de Caminhada Leve Confortável",
+    price: 179.9,
+    quantidade: 4,
+  },
+  {
+    id: 2,
+    title: "Tênis VR Caminhada Confortável Detalhes Couro Masculino",
+    price: 139.9,
+    quantidade: 4,
+  },
+  {
+    id: 3,
+    title: "Tênis Adidas Duramo Lite 2.0",
+    price: 219.9,
+    quantidade: 4,
+  },
+];
+const total = sapatos.reduce((acumulador, sapato, indice, arrayOriginal) => {
+  const { price, quantidade } = sapato;
+  return (acumulador += price * quantidade);
+}, 0);
+
+console.log(total);
+// 2158.8
 ```
