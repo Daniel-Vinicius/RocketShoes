@@ -133,17 +133,17 @@ const objeto = {
   prop2: 3,
 };
 
-// objeto[0] Não irá retornar nada pois nenhuma propriedade do objeto é igual 0
+// objeto[0] Não irá retornar nada
 
-// objeto[3] irá retornar o objeto pois a prop2 do objeto é igual a 3
+// objeto[3] Não irá retornar nada
 
-// objeto['Tomate'] irá retornar o objeto pois a prop1 do objeto é igual 'Tomate'
+// objeto['Tomate'] Não irá retornar nada
 
 const array = ["Batata", "Tomate"];
 
 // array[0] irá Retornar Batata pois o item de indice 0 é 'Batata'
 
-// array['Batata'] Sintaxe inválida
+// array['Batata'] Não irá retornar nada
 ```
 
 - **7 Filter**
