@@ -265,3 +265,15 @@ const total = sapatos.reduce((acumulador, sapato, indice, arrayOriginal) => {
 console.log(total);
 // 2158.8
 ```
+
+- **9 Concatenar dois ou mais Arrays**
+
+   Sempre que precisar Juntar dois ou mais arrays faça isso:
+
+  Sintaxe:
+
+```tsx
+setPosts([...posts, ...newPostsFormatted]);
+```
+
+Note que tanto posts quanto newPostsFormatted são EXATAMENTE do mesmo tipo Post[]
